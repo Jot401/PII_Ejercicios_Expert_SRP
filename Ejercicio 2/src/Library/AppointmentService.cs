@@ -1,53 +1,50 @@
-﻿using System;
+﻿
+using System;
 using System.Text;
 
 namespace Library
 {
+    /// <summary>
+    /// Clase que proporciona servicios relacionados con las citas médicas.
+    /// </summary>
     public class AppointmentService
     {
-        public static string CreateAppointment(string name, string id, string phoneNumber, DateTime date, string appoinmentPlace, string doctorName)
+        /// <summary>
+        /// Crea una cita médica.
+        /// </summary>
+        /// <param name="appointment">La cita médica que se va a crear.</param>
+        /// <returns>Un mensaje que indica si la cita se creó correctamente o si hubo errores.</returns>
+        public static string CreateAppointment(Appointment appointment)
         {
             StringBuilder stringBuilder = new StringBuilder("Scheduling appointment...\n");
-            Boolean isValid = true;
+            bool isValid = true;
 
-            if (string.IsNullOrEmpty(name))
+            if (!ValidationService.ValidatePatientData(appointment.Patient))
             {
-                stringBuilder.Append("Unable to schedule appointment, 'name' is required\n");
+                stringBuilder.Append("Unable to schedule appointment, patient data is invalid\n");
                 isValid = false;
             }
 
-            if (string.IsNullOrEmpty(id))
+            if (!ValidationService.ValidateDoctorData(appointment.Doctor))
             {
-                stringBuilder.Append("Unable to schedule appointment, 'id' is required\n");
+                stringBuilder.Append("Unable to schedule appointment, doctor data is invalid\n");
                 isValid = false;
             }
 
-            if (string.IsNullOrEmpty(phoneNumber))
+            if (string.IsNullOrEmpty(appointment.Place))
             {
-                stringBuilder.Append("Unable to schedule appointment, 'phone number' is required\n");
-                isValid = false;
-            }
-
-            if (string.IsNullOrEmpty(appoinmentPlace))
-            {
-                stringBuilder.Append("Unable to schedule appointment, 'appoinment place' is required\n");
-                isValid = false;
-            }
-
-
-            if (string.IsNullOrEmpty(doctorName))
-            {
-                stringBuilder.Append("Unable to schedule appointment, 'doctor name' is required\n");
+                stringBuilder.Append("Unable to schedule appointment, 'appointment place' is required\n");
                 isValid = false;
             }
 
             if (isValid)
             {
-                stringBuilder.Append("Appoinment scheduled");
+                stringBuilder.Append("Appointment scheduled");
             }
 
             return stringBuilder.ToString();
         }
 
+        // El principio aplicado es el Single Responsibility Principle (SRP) al tener una sola responsabilidad de crear citas médicas y validar datos.
     }
 }

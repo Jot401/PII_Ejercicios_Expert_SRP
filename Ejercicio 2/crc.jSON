@@ -1,0 +1,71 @@
+[
+    {
+      "name": "Patient",
+      "superclasses": "",
+      "subclasses": "",
+      "type": 1,
+      "responsibilities": [
+        "Almacenar y gestionar los datos del paciente, como nombre, identificación y número de teléfono."
+      ],
+      "collaborators": [
+        "Appointment",
+        "ValidationService"
+      ]
+    },
+    {
+      "name": "Doctor",
+      "superclasses": "",
+      "subclasses": "",
+      "type": 1,
+      "responsibilities": [
+        "Almacenar y gestionar los datos del médico, como nombre y especialidad."
+      ],
+      "collaborators": [
+        "Appointment",
+        "ValidationService"
+      ]
+    },
+    {
+      "name": "Appointment",
+      "superclasses": "",
+      "subclasses": "",
+      "type": 1,
+      "responsibilities": [
+        "Almacenar y gestionar los datos de una cita médica, incluyendo su identificador único, fecha, lugar, paciente y médico asociado."
+      ],
+      "collaborators": [
+        "Patient",
+        "Doctor"
+      ]
+    },
+    {
+      "name": "ValidationService",
+      "superclasses": "",
+      "subclasses": "",
+      "type": 1,
+      "responsibilities": [
+        "Proporcionar servicios de validación de datos para pacientes y médicos.",
+        ""
+      ],
+      "collaborators": [
+        "Patient",
+        "Doctor"
+      ]
+    },
+    {
+      "name": "AppointmentService",
+      "superclasses": "",
+      "subclasses": "",
+      "type": 1,
+      "responsibilities": [
+        "Crear citas médicas y validar los datos de pacientes y médicos antes de programar la cita.",
+        ""
+      ],
+      "collaborators": [
+        "Appointment",
+        "Patient",
+        "Doctor",
+        "ValidationService"
+      ]
+    }
+  ]
